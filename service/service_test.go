@@ -45,6 +45,8 @@ func TestValidate(t *testing.T) {
 		t.Errorf("Error: %s", err)
 	}
 
+	err = nil
+	
 	// testing that the date is valid
 	if !b {
 		t.Errorf("date should be valid")
