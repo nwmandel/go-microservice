@@ -39,22 +39,25 @@ func TestGet(t *testing.T) {
 
 func TestValidate(t *testing.T) {
 	service, ctx := setup()
-	b, err := service.Validate(ctx, "2020-04-01 15:04:05")
+	valid_date, valid_err := service.Validate(ctx, "2020-04-01 15:04:05")
 
-	if err != nil {
-		t.Errorf("Error: %s", err)
+	if valid_err != nil {
+		t.Errorf("Error: %s", valid_err)
 	}
 
-	err = nil
-	
 	// testing that the date is valid
-	if !b {
+	if !valid_date {
 		t.Errorf("date should be valid")
 	}
 
 	// testing an invalid date
-	b, err = service.Validate(ctx, "13/01/2020")
-	if b {
+	invalid_date, invalid_err := service.Validate(ctx, "13/01/2020")
+
+	if invalid_err != nil {
+		t.Errorf("Error: %s", invalid_err)
+	}
+
+	if invalid_date {
 		t.Errorf("date should be invalid")
 	}
 }
